@@ -7,7 +7,7 @@ image_resource:
     repository: quay.io/desource/alpine-build
 
 inputs:
-  - name: images
+  - name: haproxy-src
     path: src
   - name: lua-build
   - name: libslz-build
@@ -17,4 +17,4 @@ outputs:
   - name: haproxy-build
   
 run:
-  path: ./src/haproxy/build.sh
+  path: ./src/build.sh
