@@ -6,8 +6,10 @@ HAPROXY_SHA256=583e0c0c3388c0597dea241601f3fedfe1d7ff8c735d471831be67315f58183a
 
 BASE=$PWD
 SRC=$PWD/src
-OUT=$PWD/haproxy-build
+OUT=$PWD/out
 ROOTFS=$PWD/rootfs
+
+mkdir -p $OUT
 
 mkdir -p $BASE/haproxy
 cd $BASE
@@ -23,7 +25,7 @@ make TARGET=linux2628 \
        ADDLIB="-static -L$BASE/libslz-build/lib" \
        USE_SLZ=1 ADDINC=-I$BASE/libslz-build/include \
        USE_LUA=yes LUA_LIB_NAME=lua LUA_LIB=$BASE/lua-build/lib LUA_INC=$BASE/lua-build/include \
-       USE_OPENSSL=1 SSL_LIB=$BASE/libressl-build/lib SSL_INC=$BASE/libressl-build/include
+       USE_OPENSSL=1 SSL_LIB=$BASE/libressl/lib SSL_INC=$BASE/libressl/include
 
 mkdir -p $ROOTFS/bin $ROOTFS/var/run/haproxy
 
@@ -31,7 +33,16 @@ cp -r $SRC/etc $ROOTFS
 
 cp haproxy haproxy-systemd-wrapper $ROOTFS/bin
 
-mkdir -p $OUT
+cat <<EOF > $ROOTFS/etc/passwd
+root:x:0:0:root:/:/dev/null
+nobody:x:65534:65534:nogroup:/:/dev/null
+EOF
+
+cat <<EOF > $ROOTFS/etc/group
+root:x:0:
+nogroup:x:65534:
+EOF
+
 
 cd $ROOTFS
 tar -cf $OUT/rootfs.tar .

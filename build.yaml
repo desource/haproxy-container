@@ -1,20 +1,19 @@
 ---
 platform: linux
-
 image_resource:
   type: docker-image
   source:
     repository: quay.io/desource/alpine-build
 
+run:
+  path: src/build.sh
+    
 inputs:
-  - name: haproxy-src
-    path: src
+  - name: src
+  - name: libressl
   - name: lua-build
   - name: libslz-build
-  - name: libressl-build
 
 outputs:
-  - name: haproxy-build
+  - name: out
   
-run:
-  path: ./src/build.sh
