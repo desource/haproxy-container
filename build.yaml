@@ -5,10 +5,10 @@ image_resource:
   source: { repository: quay.io/desource/alpine, tag: build }
 
 run:
-  path: src/build.sh
+  path: container/build.sh
     
 inputs:
-  - name: src
+  - name: container
   - name: libressl
   - name: liblua
   - name: libslz
