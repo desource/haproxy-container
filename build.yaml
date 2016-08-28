@@ -10,8 +10,8 @@ run:
 inputs:
   - name: src
   - name: libressl
-  - name: lua-build
-  - name: libslz-build
+  - name: liblua
+  - name: libslz
 
 outputs:
   - name: out
