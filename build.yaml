@@ -2,17 +2,16 @@
 platform: linux
 image_resource:
   type: docker-image
-  source: { repository: quay.io/desource/alpine, tag: build }
+  source: { repository: alpine, tag: "3.5" }
 
 run:
   path: container/build.sh
-    
+
 inputs:
   - name: container
   - name: libressl
-  - name: liblua
+  # - name: liblua
   - name: libslz
 
 outputs:
   - name: out
-  
