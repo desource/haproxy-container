@@ -37,7 +37,7 @@ _init() {
 # _download "version" "sha256"
 _download() {
   mkdir -p ${src}
-  curl -OL http://www.haproxy.org/download/1.6/src/haproxy-${1}.tar.gz
+  curl -OL http://www.haproxy.org/download/1.7/src/haproxy-${1}.tar.gz
   echo "${2}  haproxy-${1}.tar.gz" | sha256sum -c
   tar -C ${src} --strip-components 1 -xf haproxy-${1}.tar.gz
 
